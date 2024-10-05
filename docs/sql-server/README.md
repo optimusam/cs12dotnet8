@@ -10,6 +10,7 @@
   - [Connecting to a SQL Server database](#connecting-to-a-sql-server-database)
   - [Data source aka server name](#data-source-aka-server-name)
   - [Encrypting communication](#encrypting-communication)
+  - [Configuring a remote SQL Server](#configuring-a-remote-sql-server)
   - [Defining the Northwind database context class](#defining-the-northwind-database-context-class)
   - [Scaffolding models using an existing database](#scaffolding-models-using-an-existing-database)
 - [Chapter 12 - Introducing Web Development Using ASP.NET Core](#chapter-12---introducing-web-development-using-aspnet-core)
@@ -178,6 +179,50 @@ Encrypt=false;
 dotnet dev-certs https --trust
 ```
 
+## Configuring a remote SQL Server
+
+If you are using a remote SQL Server, i.e. SQL Server is not installed on your local computer but instead on a computer that you are connected to over a network, then there are a few more settings are required. 
+
+For example, you must make sure that the Windows service named **SQL Server Browser** is running, you must enable a communication protocol that supports networks like TCP/IP (Shared Memory is enabled by default but only works on a local SQL Server), and you must enable the server's firewall to allow connections over port 1433 for TCP and UDP.
+
+Let's do that:
+
+1. In Windows, click the Start button, type `services` and press *Enter* to open the **Services** window, then double-click the entry for **SQL Server Browser**, and set the **Startup type** to **Automatic**, as shown in *Figure 9.6*:
+
+![Set SQL Server Browser in Services to start automatically](B19586_10_sql_06.png)
+*Figure 9.6: Set SQL Server Browser in Services to start automatically*
+
+SQL Server Configuration Manager is a tool to manage the services associated with SQL Server, to configure the network protocols used by SQL Server, and to manage the network connectivity configuration from SQL Server client computers. 
+
+> **More Information**: SQL Server Configuration Manager, https://learn.microsoft.com/en-us/sql/relational-databases/sql-server-configuration-manager
+
+Copy the path to the version of SQL Server Configuration Manager you have installed from the following list:
+
+- SQL Server 2022: `C:\Windows\SysWOW64\SQLServerManager16.msc`
+- SQL Server 2019: `C:\Windows\SysWOW64\SQLServerManager15.msc`
+- SQL Server 2017: `C:\Windows\SysWOW64\SQLServerManager14.msc`
+- SQL Server 2016: `C:\Windows\SysWOW64\SQLServerManager13.msc`
+
+1. In Windows, activate the Start button, paste the path, and press *Enter* to open the plug-in via Microsoft Management Console (MMC). You will be prompted to run it using Administrator access rights.
+2. Expand **SQL Server Network Configuration** and then select **Protocols for MSSQLSERVER**.
+
+![Managing Protocols for MSSQLSERVER](B19586_10_sql_07.png)
+*Figure 9.7: Managing Protocols for MSSQLSERVER*
+
+3. Double-click **TCP/IP**, and in the **TCP/IP Properties** dialog box, set **Enabled** to **true** and click **OK**. 
+4. Select **SQL Server Services**.
+
+![Managing SQL Server Services](B19586_10_sql_08.png)
+*Figure 9.8: Managing SQL Server Services*
+
+5. Right-click **SQL Server (MSSQLSERVER)** and select **Restart**.
+6. Right-click **SQL Server Browser** and select **Restart**.
+7.  Configure Windows firewall on SQL server, new incoming rules:
+    - Allow TCP 1433 (only for private, if server is in the same network).
+    - Allow UDP 1434 (only for private, if server is in the same network)
+
+> Remember that the server name for the remote connection will be `<remote_server_name>\<sql_instance_name>`.
+
 ## Defining the Northwind database context class
 
 1.	In the `WorkingWithEFCore` project, add package references to the EF Core data provider for SQL Server and the ADO.NET Provider for SQL Server, and globally and statically import the `System.Console` class for all C# files, as shown in the following markup:
@@ -187,11 +232,12 @@ dotnet dev-certs https --trust
 </ItemGroup>
 
 <ItemGroup>
-  <PackageReference Version="5.1.1" Include="Microsoft.Data.SqlClient" />
-  <PackageReference Version="8.0.0"
-    Include="Microsoft.EntityFrameworkCore.SqlServer" />
+  <PackageReference Version="5.2.0" Include="Microsoft.Data.SqlClient" />
+  <PackageReference Version="8.0.4" Include="Microsoft.EntityFrameworkCore.SqlServer" />
 </ItemGroup>
 ```
+
+> You can check for the most recent package versions at the following links: https://www.nuget.org/packages/Microsoft.Data.SqlClient#versions-body-tab and https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/#versions-body-tab.
 
 2.	Build the `WorkingWithEFCore` project to restore packages.
 3.	Add a new class file named `NorthwindDb.cs`.
@@ -252,6 +298,8 @@ Provider: Microsoft.EntityFrameworkCore.SqlServer
 > Note: Your connection string might be different.
 
 ## Scaffolding models using an existing database
+
+The instructions for this section are in the book and are the same for both SQL Server and SQLite. But the command you must enter at the command prompt or termimal is different. 
 
 For SQL Server, change the database provider and connection string, as shown in the following command:
 ```

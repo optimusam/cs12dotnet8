@@ -46,6 +46,10 @@ Write an Amazon review for this book: https://packt.link/r/1837635870
 - Chapter 14 Building and Consuming Web Services: [code/PracticalApps/Northwind.WebApi](code/PracticalApps/Northwind.WebApi)
 - Chapter 15 Building User Interface Components Using Blazor: [code/PracticalApps/Northwind.Blazor](code/PracticalApps/Northwind.Blazor)
 
+**Appendix and online chapter**
+- [Appendix, Answers to the Test Your Knowledge Questions](docs/B19586_Appendix.pdf).
+- [Online Chapter - Building Websites Using the Model-View-Controller Pattern](docs/B19586_Online_Chapter.pdf)
+
 ## Code solutions for Visual Studio 2022 and Visual Studio Code
 
 [Figures for all of the code solution folders](docs/ch01-solution-folders.md).
@@ -100,6 +104,7 @@ Microsoft used to have professional exams and certifications for developers that
 
 Podcast interviews with me:
 
+- [The Modern .NET Show Podcast - January 26, 2024](https://dotnetcore.show/season-6/the-net-trilogy-and-learning-net-with-mark-j-price/)
 - [The .NET Core Podcast - March 3, 2023](https://dotnetcore.show/episode-117-our-perspectives-on-the-future-of-net-with-mark-j-price/)
 - [Yet Another Podcast with Jesse Liberty - December 2022](https://jesseliberty.com/2022/12/10/mark-price-on-c-11-fixed/)
 - [The .NET Core Podcast - February 4, 2022](https://dotnetcore.show/episode-91-c-sharp-10-and-dotnet-6-with-mark-j-price/)
