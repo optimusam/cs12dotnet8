@@ -7,6 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssembliesAndNamespaces", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedLibrary", "SharedLibrary\SharedLibrary.csproj", "{303B4F18-C8FF-4F42-A5F5-0BDE27C6306C}"
 EndProject
+
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetEverywhere", "DotNetEverywhere\DotNetEverywhere.csproj", "{6F7C8D21-834D-4108-9F48-51F4176FC793}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Packt.SourceGeneration", "Packt.SourceGeneration\Packt.SourceGeneration.csproj", "{0A419022-3D0B-4F90-ABCB-1F14E28EE6C4}"

@@ -1,1 +1,38 @@
 .DS_Store
+// add .gitignore files for .NET project
+# Solution Files
+*.sln
+
+# Project Files
+*.csproj
+obj/
+bin/
+
+# NuGet Packages
+packages/
+
+# Local configuration file (secret endpoint, etc.)
+appsettings.json
+
+# Visual Studio cache directory
+.vs/
+
+# MSTest test DLLs
+TestResults/
+
+#  .NET Core/.NET CLI
+bin/
+obj/
+*.zip
+
+# node_modules folder
+node_modules/
+
+# .env files
+*.env
+
+# .vscode directory v1.54.0+
+.vscode/*
+
+# .dotnet core 3.1 preview version (2.0.<｜begin▁of▁sentence｜>-preview2.15709)
+.internalOmniSharp/
